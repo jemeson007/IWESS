@@ -1,0 +1,117 @@
+﻿@using IWNet
+@using System.Configuration
+@{
+    ViewBag.Title = "Survey List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <!-- /.row -->
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-horizontal">
+                        @using (Html.BeginForm("ViewSurvey", "Operation", FormMethod.Post, new { @class = "form-inline" }))
+                        {
+                            //var empID = @row.EmpID;
+                            @*@Html.DropDownList("EmpID", new SelectList((IEnumerable<IWESS.Models.CSurbordinates>)ViewData["Surbodinates"], "EmpID", "EmpName"), new { @class = "form-control" })
+
+                            <div class="form-group">
+                                <input class="btn btn-primary pull-right" type="submit" value="Submit" />
+                            </div>*@
+                            <div class="input-group">
+                                @Html.DropDownList("EmpID", new SelectList((IEnumerable<IWESS.Models.CSurbordinates>)ViewData["Surbodinates"], "EmpID", "EmpName"), new { @class = "form-control" })
+                                <span class="input-group-btn">
+                                    <input class="btn btn-primary" type="submit" value="Go!" />
+                                </span>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="page-heading">
+                        <h3>List of Surveys</h3>
+                    </div>
+                    <p>
+                        <b>NOTE</b>: All Appraisals must follow the new taxonomy. Please click <b><a href="@ConfigurationManager.AppSettings["Taxonomy_URL"]" target="_blank">here</a></b> to download or preview the new Taxonomy. This is to ensure all managers speak a common language and use a common taxonomy when assigning appraisal scores.
+                    </p>
+                    @*<ul>
+                        <li>
+                            All people managers must adhere strictly to this taxonomy. Meaning, they should have a printout or view of this in front of them while doing appraisals
+                        </li>
+                        <li>
+                            All people managers must be able to explain and/or justify their appraisal ratings using this table
+                        </li>
+                        <li>
+                            All employees should be strongly advised to keep themselves aware and abreast of this taxonomy
+                        </li>
+                        <li>
+                            HR to create a mechanism that ensures this table is accessible by for example putting a link to this on our ESS portal and possibly including a link on the employee commitments survey
+                        </li>
+                    </ul>*@
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th>Date</th>
+                                    <th>Comments</th>
+                                    <th>Rejection Reasons</th>
+                                    <th>Survey Taken</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var row in (ViewData["Surveys"] as IEnumerable<IWESS.Models.CViewSurveys>))
+                {
+                    <tr>
+                        @if (string.IsNullOrEmpty(row.EffectiveDate))
+        {
+                <td>@DateTime.Now</td>
+}
+else
+{
+                <td>@Common.ConvertEx.ToDateTime(row.EffectiveDate).ToString(Common.DateHelper.FMT_DT)</td>
+}
+
+
+                        @if (string.IsNullOrEmpty(row.Comments))
+        {
+                <td>No Comment</td>
+}
+else
+{
+                <td>@row.Comments</td>
+}
+
+                        @if (row.RejectionReasons.ToString() == "NULL")
+        {
+                <td>No Reasons</td>
+}
+else
+{
+                <td>@row.RejectionReasons</td>
+}
+
+                        @if (row.SurveyTaken == "No")
+        {
+                <td><a href="@row.SurveyURL" target="_blank">Take Survey</a></td>
+}
+else
+{
+                <td>Taken</td>
+}
+                    </tr>
+}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+
+

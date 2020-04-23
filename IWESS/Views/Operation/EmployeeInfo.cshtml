@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "Employee Info";
+}
+    <div id="page-wrapper">
+        <div class="container-fluid">
+           
+            <!-- /.row -->
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="page-header">
+                        <h3>Employee Information</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th>Items</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var row in (ViewData["Info"] as IEnumerable<IWESS.Models.CEmployeeInfo>))
+                                {
+                                    <tr>
+                                        <th scope="row">Name</th>
+                                        <td>@row.Name</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Title</th>
+                                        <td>@row.Title</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gender</th>
+                                        @if (row.Gender.Equals("1"))
+                                        {
+                                            <td>Male</td>
+                                        }
+                                        @if (row.Gender.Equals("2"))
+                                        {
+                                            <td>Female</td>
+                                        }
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">City</th>
+                                        <td>@row.City</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">State</th>
+                                        <td>@row.State</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Country</th>
+                                        <td>@row.Country</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email</th>
+                                        <td>@row.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Phone Number</th>
+                                        <td>@row.Phone</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Nationality</th>
+                                        <td>@row.Nationality</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Birthday</th>
+                                        <td>@row.Birthday</td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @*<div class="col-md-6 col-xs-12 col-lg-4">
+                        <label>Name</label>
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-lg-8">
+                        <label>name</label>
+                    </div>*@
+                    @*<div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color:#004d50; border: none; color: #fff;">
+                    Employee details
+                </div>
+                <div class="panel-body">
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="col-md-4 hidden-sm hidden-xs">
+            <div class="page-header">
+                <h4 class="text-info">Most Recent Links</h4>
+            </div>
+            <div class="list-group">
+                <a href="@Url.Action("PayStubList", "Operation")" class="list-group-item">
+                    <h4 class="list-group-item-heading">Salary Details</h4>
+                    <p class="list-group-item-text">View your salary payslips</p>
+                </a>
+                <a href="@Url.Action("BankInfo", "Operation")" class="list-group-item success">
+                    <h4 class="list-group-item-heading">Bank details</h4>
+                    <p class="list-group-item-text">View the details of your bank account number, bank account name and bank details</p>
+                </a>
+                <a href="@Url.Action("JobInfo", "Operation")" class="list-group-item">
+                    <h4 class="list-group-item-heading">Job History</h4>
+                    <p class="list-group-item-text">View your job history, projects and job promotions on the ESS Portal</p>
+                </a>
+            </div>
+        </div>*@
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>

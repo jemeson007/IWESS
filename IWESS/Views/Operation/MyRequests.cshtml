@@ -1,0 +1,178 @@
+﻿@model IWESS.ViewModel.VMRequestTO
+@{
+    ViewBag.Title = "TimeOff";
+}
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>ViewBag.ErrorMessage</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@if (string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <script>
+        $('#myModal').modal();
+    </script>
+}
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <!-- /.row -->
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h3>Timeoff Requests</h3>
+            </div>
+            @foreach (var row in (ViewData["AnnualLeave"] as IEnumerable<IWESS.Models.CAnnualTakenLeave>))
+            {
+                if (row.NumberAnnualLeave.Equals(""))
+                {
+                    <h3 class="text-info">Number of leave days taken :  0</h3>
+                    <h3 class="text-info">Number of leave days taken :    <span id="AnnualLeaveTaken">20</span></h3>
+                }
+                else
+                {
+                    <h3 class="text-info">Number of leave days taken :    <span id="AnnualLeaveTaken">@row.NumberAnnualLeave</span></h3>
+                }
+
+            }
+            <div class="row">
+                <div class="col-md-12">
+                    <br />
+                    <p><b>Status:</b>&nbsp;<span class="alert alert-warning">Pending</span></p>
+                    <br />
+                    @*<div class="form-group">
+                            <label for="startdate">Number of non-working days within this period</label>
+                            <input type="number" class="form-control" id="noOfPublicHols"  placeholder="0">
+                        </div>*@
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.Label("Error", ViewBag.Error as string, new { @align = "center" })
+                        </div>
+                    }
+                    <br />
+                    @using (Html.BeginForm("MyRequests", "Operation", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="startdate">Start Date</label>
+                                    <input type="date" class="form-control" id="startdate" name="StartDate" placeholder="dd/mm/yyyy">
+                                    @Html.ValidationMessageFor(m => m.StartDate)
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="enddate">Proposed End Date</label>
+                                    <input type="date" class="form-control" id="enddate" name="EndDate" placeholder="dd/mm/yyyy">
+                                    @Html.ValidationMessageFor(m => m.EndDate)
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="timeofftype">Time Off type</label>
+                                    <select class="form-control" name="Type" id="selectList_" onchange="selectChange();">
+                                        <option value="">&nbsp;</option>
+                                        @foreach (var row in ViewData["Type"] as IEnumerable<IWESS.Models.CTimeOffType>)
+                                        {
+                                            <option value="@row.ID">@row.Name</option>
+                                        }
+                                    </select>
+                                    @Html.ValidationMessageFor(m => m.Type)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea name="Comment" class="form-control" rows="3" cols="100"></textarea>
+                                    @Html.ValidationMessageFor(m => m.Comment)
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <input type="submit" value="Submit" id="submitbtn" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    function selectChange() {
+        var str = document.getElementById("selectList_").value;
+        //var noOfPublicHols = document.getElementById("noOfPublicHols").value;
+        //1day = 86400,000milliseconds
+        var totalLeave = 22 * 86400000;
+
+        var annualLeaveTaken = document.getElementById("AnnualLeaveTaken").textContent;
+        console.log("annual leave taken " + typeof (annualLeaveTaken));
+        //if (annualLeaveTaken = null)
+        //{
+        //    annualLeaveTaken = 0;
+        //}
+        annualLeaveTaken = parseInt(annualLeaveTaken);
+        console.log("annual leave taken " + annualLeaveTaken);
+
+        var StartDate = document.getElementById("startdate").value;
+        //convert to date tytpe
+        var _startdate = new Date(StartDate.replace("-", "/"));
+        var isWeekend = false;
+
+        var EndDate = document.getElementById("enddate").value;
+        //convert to date type
+        var _enddate = new Date(EndDate.replace("-", "/"));
+
+        var daysDiff = Math.abs(_startdate.getTime() - _enddate.getTime());
+        console.log("daysDiff in milliseconds " + daysDiff);
+        //{//ToDo iteratively discover and calculate for weekends and public hols}
+
+        //if(noOfPublicHols > 0)
+        //{
+        //    daysDiff = daysDiff - noOfPublicHols;
+        //    console.log("days after public hols off " + daysDiff);
+        //}
+        console.log("annualleavetaken + daysDiff " + (annualLeaveTaken + daysDiff));
+        if ((annualLeaveTaken + daysDiff) >= totalLeave) {
+            alert("Sorry you've used up your annual leave");
+            document.getElementById("submitbtn").disabled = true;
+        }
+        else {
+            //alert("not used up yet");
+            document.getElementById("submitbtn").disabled = false;
+        }
+
+    }
+
+</script>

@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "PerfAppraisal";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <h2>Ess Performance Appraisal</h2>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label>Employee Name
+                    <span>: Charles Esumeh</span>
+                </label><br />
+                <label>Position
+                    <span>: UX/Software Developer</span>
+                </label><br />
+                <label>Unit
+                    <span>: Development Unit</span>
+                </label>
+            </div>
+            <div class="col-md-4">
+                <label>Personnel No
+                    <span>: 051</span>
+                </label><br />
+                <label>Manager
+                    <span>: Uwa Agbonile</span>
+                </label><br />
+                <label>Last Job Position
+                    <span>: Junior Software Developer</span>
+                </label>
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <div class="row">
+
+            <div id="exTab2">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#1" data-toggle="tab">Software Development</a>
+                    </li>
+                    <li>
+                        <a href="#2" data-toggle="tab">UI/UX Design</a>
+                    </li>
+                    <li>
+                        <a href="#3" data-toggle="tab">Team Assessment</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="1">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>Tasks</th>
+                                    <th>Final Result (5)</th>
+                                    <th>Ratings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Sync Code to development repository</td>
+                                    <td>5</td>
+                                    <td>Excellent</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Understanding of Business Logic</td>
+                                    <td>3</td>
+                                    <td>Good</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-offset-9 col-md-3">
+                                <a href="" data-toggle="modal" data-target="#myModal" class="btn btn-primary"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="2">
+                        <h3>Notice the gap between the content and tab after applying a background color</h3>
+                    </div>
+                    <div class="tab-pane" id="3">
+                        <h3>add clearfix to tab-content (see the css)</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+

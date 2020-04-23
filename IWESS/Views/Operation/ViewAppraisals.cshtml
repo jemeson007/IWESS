@@ -1,0 +1,96 @@
+﻿@using IWNet
+@using System.Configuration
+@{
+    ViewBag.Title = "View Appraisals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <!-- /.row -->
+        <div class="col-lg-12">
+            <div class="form-horizontal">
+                @using (Html.BeginForm("ViewAppraisals", "Operation", FormMethod.Post, new { @class = "form-inline" }))
+                {
+
+                    //var empID = @row.EmpID;
+                    @*@Html.DropDownList("EmpID", new SelectList((IEnumerable<IWESS.Models.CSurbordinates>)ViewData["Surbodinates"], "EmpID", "EmpName"), new { @class = "form-control" })
+
+                        <div class="form-group">
+                            <input class="btn btn-primary pull-right" type="submit" value="Submit" />
+                        </div>*@
+
+                    <div class="input-group">
+                        @Html.DropDownList("EmpID", new SelectList((IEnumerable<IWESS.Models.CSurbordinates>)ViewData["Surbodinates"], "EmpID", "EmpName"), new { @class = "form-control" })
+                        <span class="input-group-btn">
+                            <input class="btn btn-primary" type="submit" value="Go!" />
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-heading">
+                        <h3>List of Appraisals</h3>
+                    </div>
+                    <p>
+                        <b>NOTE</b>: All Appraisals must follow the new taxonomy. Please click <b><a href="@ConfigurationManager.AppSettings["Taxonomy_URL"]" target="_blank">here</a></b> to download or preview the new Taxonomy. This is to ensure all managers speak a common language and use a common taxonomy when assigning appraisal scores.
+                    </p>
+                    @*<ul>
+                        <li>
+                            All people managers must adhere strictly to this taxonomy. Meaning, they should have a printout or view of this in front of them while doing appraisals
+                        </li>
+                        <li>
+                            All people managers must be able to explain and/or justify their appraisal ratings using this table
+                        </li>
+                        <li>
+                            All employees should be strongly advised to keep themselves aware and abreast of this taxonomy
+                        </li>
+                        <li>
+                            HR to create a mechanism that ensures this table is accessible by for example putting a link to this on our ESS portal and possibly including a link on the employee commitments survey
+                        </li>
+                    </ul>*@
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th>Effective Date</th>
+                                    <th>Employee ID</th>
+                                    <th>Appraisal Status</th>
+                                    <th>Appraisal Taken</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var row in (ViewData["Appraisals"] as IEnumerable<IWESS.Models.CViewAppraisals>))
+                                {
+                                    <tr>
+                                        <td>@Common.ConvertEx.ToDateTime(row.EffectiveDate).ToString(Common.DateHelper.FMT_DT)</td>
+                                        <td>@row.EmpID</td>
+                                        @if (row.AppraisalTaken == "No")
+                                        {
+                                            /**/
+                                            <td><a target="_blank" href="@row.AppraisalURL">Take Appraisal</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td>Appraisal Taken</td>
+                                        }
+                                        <td>@row.AppraisalTaken</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>
+<!-- /.container-fluid -->
+</div>
+
+

@@ -1,0 +1,89 @@
+﻿@using IWNet
+@using System.Data;
+@using IWESS.Models;
+@using System.Configuration;
+@model IWESS.Models.CEmployeePoints
+@{
+    ViewBag.Title = "View Committments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DataTable dt = ViewBag.Commitments;
+    CFunctionCall _functionCall = new CFunctionCall();
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="col-md-12">
+                @using (Html.BeginForm("ViewCommittments", "Operation", FormMethod.Post, new { @class = "form-inline" }))
+                {
+                    <form class="form-inline">
+                        <div class="form-group mb-2">
+                            <label for="staticEmail2" class="sr-only">Email</label>
+                            @Html.DropDownListFor(model => model.EmpID, new SelectList((IEnumerable<IWESS.Models.CSurbordinates>)ViewData["Surbodinates"], "EmpID", "EmpName"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="inputPassword2" class="sr-only">Start Date</label>
+                            @Html.TextBoxFor(model => model.StartDate, new { type = "date", @class = "form-control" })
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="inputPassword2" class="sr-only">End Date</label>
+                            @Html.TextBoxFor(model => model.EndDate, new { type = "date", @class = "form-control" })
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Go!</button>
+                    </form>
+                }
+            <!-- /.row -->
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h3>Commitments</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h2 class="text text-right"><small>Appraisal Point:</small>@Common.FormatEx.FormatCurrency(Common.ConvertEx.ToDouble(ViewBag.EmployeeGP))</h2>
+                            </div>
+                            <div class="col-md-4">
+                                <h2 class="text text-right"><small>Cummulative Appraisal Point:</small>@Common.FormatEx.FormatCurrency(Common.ConvertEx.ToDouble(ViewBag.EmployeeCGPA))</h2>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                            <p>The following list below are the list of committments or responsibilities that is expected of you the InfoWARE employee. Dereliction of any of the listed committments will be seen as gross negligence of duty and appropriate action would be taken against any one found wanting.</p>
+                            <p>Also, download the @ConfigurationManager.AppSettings["LicenseeShortCompanyName"] Process workflow document. Click <a href="@ConfigurationManager.AppSettings["ProcessWorkflow_URL"]" target="_blank">here</a></p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr class="bg-primary">
+                                            <th>Business Area</th>
+                                            <th>Sub Area</th>
+                                            <th>Committments</th>
+                                            <th>Weight</th>
+                                            <th>Score</th>
+                                            <th>Aggregate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @*@foreach (var row in (ViewData["Committments"] as IEnumerable<IWESS.Models.CViewCommittment>))*@
+                                        @foreach(DataRow row in dt.Rows)
+                                        {
+                                                <tr>
+                                                    <td>@row["BusinessArea"]</td>
+                                                    <td>@row["SubArea"]</td>
+                                                    <td>@Html.Raw(row["Committment"])</td>
+                                                    <td>@row["Credits"]</td>
+                                                    <td>@Html.ActionLink((string)@Common.FormatEx.FormatCurrency(Common.ConvertEx.ToDouble(row["Score"])), "ViewComment", new { id = row["CommittmentID"] })</td>
+                                                    <td>@Common.FormatEx.FormatCurrency(Common.ConvertEx.ToDouble(_functionCall.GetCommitmentMeanScore(CSessionManager.IWSessionID, row["CommittmentID"].ToString(), ViewBag.MyEmpID)))</td>
+                                                </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>

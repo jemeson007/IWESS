@@ -1,0 +1,55 @@
+﻿@using System.Data;
+@using IWNet
+@{
+    ViewBag.Title = "ViewComment";
+    DataTable tb = ViewBag.details;
+}
+
+<h2>Commitment <a href="@Url.Action("ViewCommittments", "Operation")">Back</a></h2>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        @foreach (DataRow row in tb.Rows)
+    {
+        <tr>
+            <td><label>Business Area</label></td>
+            <td>@row["BusinessArea"]</td>
+        </tr>
+        <tr>
+            <td><label>Sub Area</label></td>
+            <td>@row["SubArea"]</td>
+        </tr>
+        <tr>
+            <td><label>Commitment</label></td>
+            <td>@row["Commitment"]</td>
+        </tr>
+        <tr>
+            <td><label>Your comment</label></td>
+            <td>@row["SurveyComments"]</td>
+        </tr>
+        <tr>
+            <td><label>Comment made</label></td>
+            <td>@row["AppraisalComments"]</td>
+        </tr>
+        <tr>
+            <td><label>Score</label></td>
+            <td>@row["Score"]</td>
+        </tr>
+        <tr>
+            <td><label>Weight of Commitment</label></td>
+            <td>@row["Credits"]</td>
+        </tr>
+        <tr>
+            <td><label>Survey Comments</label></td>
+            <td>@row["SurveyComments"]</td>
+        </tr>
+        <tr>
+            <td><label>Date Appraisal taken</label></td>
+            <td>@Common.ConvertEx.ToDateTime(row["DateAppraiserDone"]).ToString(Common.DateHelper.FMT_DT)</td>
+        </tr>
+
+}
+
+    </table>
+</div>
+
+

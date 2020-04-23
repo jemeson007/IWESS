@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html class="bootstrap-admin-vertical-centered">
+<head>
+    <title>ESS - Login</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" media="screen" href="~/Content/bootstrap.min_ess.css">
+    <link rel="stylesheet" media="screen" href="~/Content/bootstrap-theme.min_ess.css">
+    <link rel="stylesheet" media="screen" href="~/Content/bootstrap-admin-theme_ess.css">
+    <link href="~/Content/custom.css" media="screen" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+
+    <style>
+        body {
+            background: url(../../img/emp.jpg);
+            background-size: cover;
+        }
+
+        .form-signin {
+            background: #fff;
+            max-width: 420px;
+            padding: 30px;
+            margin: 120px auto;
+            border-radius: 5px;
+        }
+
+        #Username, #Password {
+            max-width: none;
+        }
+    </style>
+</head>
+<body onload="prevent();" class="bootstrap-admin-without-padding" style="background: #808080;">
+
+    <div class="container">
+      @RenderBody()
+    </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+    }
+</body>
+
+</html>
+
+
+
+

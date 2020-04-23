@@ -1,0 +1,7 @@
+﻿@foreach (var item in (ViewData["NetPay"] as IEnumerable<IWESS.Models.CNetPay>))
+{
+    <tr>
+        <th>Amount In Words</th>
+        <th>@item.NetPay</th>
+    </tr>
+}

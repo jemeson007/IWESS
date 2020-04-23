@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "PayStub Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <div class="col-md-12">
+            <div class="page-header">
+                    <h2>Salary Details</h2>
+                   <h4><a class="text-info" href="@Url.Action("PayStubList", "Operation")">Go Back</a></h4>
+            </div>
+            <div class="table-responsive">
+                @Html.Partial("Partials/_EmployeePayInfo")
+            </div>
+            </div>
+    </div>
+</div>
+<!-- /.row -->

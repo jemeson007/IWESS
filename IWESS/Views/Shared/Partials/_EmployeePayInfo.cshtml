@@ -1,0 +1,54 @@
+﻿@foreach (var row in (ViewData["EmpPay"] as IEnumerable<IWESS.Models.CEmployeePayInfo>))
+{
+    @*<table class="table table-bordered" id="paystubdetails">
+        <tbody>
+
+        </tbody>
+    </table>*@
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th class="text-left">
+                    <img src="~/img/logoPaySlip.png" style="width: 100px; height: 60px;" />
+                    @*<img src="~/img/logoPaySlip.png" />*@
+                </th>
+                <th class="text-right" valign="middle">Payslip for @ViewBag.PayDate</th>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>@String.Format("{0}" + " " + "{1}" + " " + "{2}", row.FirstName, row.MiddleName, row.LastName) </td>
+            </tr>
+            <tr>
+                <th>Department Name</th>
+                <td>@row.Department</td>
+            </tr>
+            <tr>
+                <th>Designation Name</th>
+                <td>@row.Designature</td>
+            </tr>
+            <tr>
+                <th>Employee Bank</th>
+                <td>@row.BankName</td>
+            </tr>
+            <tr>
+                <th>Bank Acct No</th>
+                <th>@row.AcctNumber</th>
+            </tr>
+            <tr style="background: aquamarine;">
+                <th style="border: none;">
+                    Particular
+                </th>
+                <th style="border: none;">
+                    &#x20A6;
+                </th>
+            </tr>
+            @Html.Partial("Partials/_GrossEarnings")
+            <tr style="background: aquamarine;">
+                <th style="border: none;">Gross Deductions</th>
+                <th style="border: none;"></th>
+            </tr>
+            @Html.Partial("Partials/_GrossDeductions")
+            @Html.Partial("Partials/_NetPay")
+        </tbody>
+    </table>
+}

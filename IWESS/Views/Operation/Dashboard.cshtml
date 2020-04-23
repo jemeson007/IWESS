@@ -1,0 +1,97 @@
+﻿@using System.Configuration;
+@{
+    ViewBag.Title = "Home";
+}
+
+
+
+<!-- Modal -->
+
+@*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <img src="~/Images/emp-appreciation.png" />
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <img style="width: 100%" src="~/Images/emp-appreciation.png" />
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @if (ViewBag.Message == true)
+    {
+        <script>
+            $('#myModal').modal()
+        </script>
+    }
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!-- /.row -->
+        <div class="jumbotron">
+            <h2>Welcome to the @ConfigurationManager.AppSettings["LicenseeShortCompanyName"] Employee Self Service Portal</h2>
+            <p>Click the images below to get started</p>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-xs-6 col-md-3">
+                    <a href="@Url.Action("PayStubList", "Operation")" class="thumbnail">
+                        <img alt="" src="~/Images/img1.jpg">
+                        <div class="carousel-caption" style="background-color:rgba(0,0,0,0.7); height:40px; top: 50px;">
+                            Salary Details
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <a href="@Url.Action("Qualify", "Operation")" class="thumbnail">
+                        <img alt="" src="~/Images/img2.jpg">
+                        <div class="carousel-caption" style="background-color:rgba(0,0,0,0.7); height:40px; top: 50px;">
+                            Qualification
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <a href="@Url.Action("EmployeeInfo", "Operation")" class="thumbnail">
+                        <img alt="" src="~/Images/img3.jpg">
+                        <div class="carousel-caption" style="background-color:rgba(0,0,0,0.7); height:40px; top: 50px;">
+                            Employee Details
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <a href="@Url.Action("JobInfo", "Operation")" class="thumbnail">
+                        <img alt="" src="~/Images/img4.jpg">
+                        <div class="carousel-caption" style="background-color:rgba(0,0,0,0.7); height:40px; top: 50px;">
+                            Job History
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>

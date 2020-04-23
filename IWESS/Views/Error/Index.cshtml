@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+
+
+<div class="col-md-offset-1 col-md-10">
+    <div class="hidden-sm hidden-xs">
+        <ol class="breadcrumb" style="margin-bottom: 0;">
+            <li><a href="#">Error</a></li>
+        </ol>
+    </div>
+    <div class="well">
+        <div class="page header text-center">
+            @*<i class="fa fa-bug fa-5x" aria-hidden="true"></i>*@<h1 class="info-text" style="font-size: 9em; font-weight: 900;"><span class="fa fa-cloud"></span></h1>
+            <h2>Oops! An Error Occurred</h2>
+            <p>For some reason, your request cannot be completed. Please Contact Customer Service</p>
+            <p>
+                <a class="btn btn-primary" href="@Url.Action("Index", "Operation")">Go Home</a>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>

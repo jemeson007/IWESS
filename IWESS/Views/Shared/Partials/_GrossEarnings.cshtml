@@ -1,0 +1,7 @@
+﻿@foreach (var item in (ViewData["GrossEarnings"] as IEnumerable<IWESS.Models.CGrossEarnings>))
+{
+    <tr>
+        <th>@item.Description</th>
+        <td>@item.Amount</td>
+    </tr>
+}

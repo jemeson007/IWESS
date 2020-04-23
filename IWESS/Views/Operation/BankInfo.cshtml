@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Bank Info";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+
+        <!-- /.row -->
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="page-header">
+                    <h3>Bank Information</h3>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="bg-primary">
+                            <th>Title</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in (ViewData["Info"] as IEnumerable<IWESS.Models.CBankInfo>))
+                        {
+                            <tr>
+                                <th scope="row">Bank Name</th>
+                                <td>@row.BankName</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Account Number</th>
+                                <td>@row.AcctNumber</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Account name</th>
+                                <td>@row.AccountName</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+
+                @*<div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color:#004d50; border: none; color: #fff;">
+                    Bank Information
+                </div>
+                <div class="panel-body">
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="col-md-4 hidden-sm hidden-xs">
+            <div class="page-header">
+                <h4 class="text-info">Most Recent Links</h4>
+            </div>
+            <div class="list-group">
+                <a href="@Url.Action("PayStubList", "Operation")" class="list-group-item">
+                    <h4 class="list-group-item-heading">Salary Details</h4>
+                    <p class="list-group-item-text">View your salary payslips</p>
+                </a>
+                <a href="@Url.Action("BankInfo", "Operation")" class="list-group-item success">
+                    <h4 class="list-group-item-heading">Bank details</h4>
+                    <p class="list-group-item-text">View the details of your bank account number, bank account name and bank details</p>
+                </a>
+                <a href="@Url.Action("JobInfo", "Operation")" class="list-group-item">
+                    <h4 class="list-group-item-heading">Job History</h4>
+                    <p class="list-group-item-text">View your job history, projects and job promotions on the ESS Portal</p>
+                </a>
+            </div>
+        </div>*@
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+
+
+
+
